@@ -1,14 +1,14 @@
-require('dotenv').config(); // Charger les variables d'environnement en premier
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path'); // Ajoutez cette ligne !
+const path = require('path');
 const app = express();
-const port = process.env.PORT || 5001; // Utilise le port fourni par Render ou 5000 par défaut
+const port = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors());
-app.use(express.json()); // Pour parser les corps de requête JSON
+app.use(express.json());
 
 // Connexion à MongoDB Atlas
 const uri = process.env.MONGODB_URI;
@@ -24,7 +24,7 @@ const todoSchema = new mongoose.Schema({
 
 const Todo = mongoose.model('Todo', todoSchema);
 
-// Routes API
+// Routes API (Laisser celles-ci inchangées, elles sont correctes)
 app.get('/api/todos', async (req, res) => {
     try {
         const todos = await Todo.find({});
@@ -51,7 +51,7 @@ app.put('/api/todos/:id', async (req, res) => {
         const updatedTodo = await Todo.findByIdAndUpdate(
             req.params.id,
             { text: req.body.text, completed: req.body.completed },
-            { new: true } // Retourne le document modifié
+            { new: true }
         );
         if (!updatedTodo) {
             return res.status(404).json({ message: 'Tâche non trouvée' });
@@ -74,18 +74,20 @@ app.delete('/api/todos/:id', async (req, res) => {
     }
 });
 
-// Pour la production : servir le frontend React statique
-// Important : Ceci doit être après vos routes API
+// --- NOUVELLE SECTION POUR LA PRODUCTION ---
 if (process.env.NODE_ENV === 'production') {
-    // Si votre frontend est construit dans un dossier 'dist' ou 'build' à la racine du backend
-    app.use(express.static(path.join(__dirname, '../frontend/build'))); // Adaptez ce chemin !
+    // Chemin absolu vers le dossier 'build' de votre frontend
+    const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'build');
+
+    // Servir les fichiers statiques du frontend
+    app.use(express.static(frontendBuildPath));
 
     // Pour toute requête non API, renvoyer le fichier index.html du frontend
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html')); // Adaptez ce chemin !
+        res.sendFile(path.join(frontendBuildPath, 'index.html'));
     });
 }
-
+// --- FIN DE LA NOUVELLE SECTION ---
 
 app.listen(port, () => {
     console.log(`Serveur Node.js démarré sur le port : ${port}`);
