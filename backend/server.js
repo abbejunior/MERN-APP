@@ -2,7 +2,7 @@ require('dotenv').config(); // Charger les variables d'environnement en premier
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const path = require('path'); // Ajoutez cette ligne !
 const app = express();
 const port = process.env.PORT || 5001; // Utilise le port fourni par Render ou 5000 par défaut
 
