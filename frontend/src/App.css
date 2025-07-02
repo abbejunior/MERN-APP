@@ -1,0 +1,141 @@
+/* Styles généraux du corps */
+body {
+  font-family: 'Roboto', sans-serif; /* Pensez à importer Roboto depuis Google Fonts */
+  background-color: #f4f7f6; /* Fond très clair */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.App {
+  background-color: #ffffff; /* Fond blanc pour le conteneur principal */
+  border-radius: 12px; /* Coins plus arrondis */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+  padding: 30px;
+  max-width: 600px;
+  width: 90%; /* Pour une meilleure adaptabilité */
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 2.2em;
+  font-weight: 700;
+}
+
+.add-todo {
+  display: flex; /* Utilisation de Flexbox pour aligner input et bouton */
+  gap: 10px; /* Espace entre les éléments */
+  margin-bottom: 25px;
+}
+
+.add-todo input {
+  flex-grow: 1; /* L'input prend le maximum d'espace */
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1em;
+  outline: none; /* Supprime le contour bleu au focus */
+  transition: border-color 0.3s ease;
+}
+
+.add-todo input:focus {
+  border-color: #007bff; /* Changement de couleur de bordure au focus */
+}
+
+.add-todo button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.add-todo button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px); /* Petit effet de survol */
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fcfcfc;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.todo-list li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.todo-list li span {
+  flex-grow: 1;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #444;
+}
+
+.todo-list li.completed {
+  background-color: #e6ffe6; /* Fond plus clair pour complété */
+  border-color: #c9f0c9;
+}
+
+.todo-list li.completed span {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.todo-list li button {
+  margin-left: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.todo-list li button:nth-of-type(1) { /* Modifier */
+  background-color: #28a745;
+  color: white;
+}
+
+.todo-list li button:nth-of-type(1):hover {
+  background-color: #218838;
+}
+
+.todo-list li button:nth-of-type(2) { /* Supprimer/Annuler */
+  background-color: #dc3545;
+  color: white;
+}
+
+.todo-list li button:nth-of-type(2):hover {
+  background-color: #c82333;
+}
+
+.todo-list li input[type="text"] {
+  flex-grow: 1;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+}
